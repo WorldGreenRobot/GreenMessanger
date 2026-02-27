@@ -44,6 +44,8 @@
     <string name="repeat">Повторить</string>
     <string name="unknown_error">Неизвестная ошибка</string>
     <string name="profile_picture_empty">Фото профиля</string>
+    <string name="menu">Меню</string>
+    <string name="arrow_back">Назад</string>
 
     <plurals name="count_members">
         <item quantity="one">%d участник</item>

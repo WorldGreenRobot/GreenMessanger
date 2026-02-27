@@ -7,4 +7,25 @@ import kotlinx.serialization.Serializable
 object Chats : NavKey
 
 @Serializable
-data class Chat(val id: String) : NavKey
+data class ChatNavigate(val id: String) : NavKey
+
+@Serializable
+object CreateGroup : NavKey
+
+@Serializable
+object CreateSecretChat : NavKey
+
+@Serializable
+object Contacts : NavKey
+
+@Serializable
+object Calls : NavKey
+
+@Serializable
+object Settings : NavKey
+
+@Serializable
+object Helps : NavKey
+
+@Serializable
+object QuiestionAboutTelegram : NavKey

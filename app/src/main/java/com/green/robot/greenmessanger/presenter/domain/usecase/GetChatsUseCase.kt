@@ -2,7 +2,6 @@ package com.green.robot.greenmessanger.presenter.domain.usecase
 
 import android.net.Uri
 import com.green.robot.greenmessanger.presenter.domain.entity.chats.Chat
-import com.green.robot.greenmessanger.presenter.domain.entity.chats.ChatData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import java.util.Calendar
@@ -14,7 +13,7 @@ class GetChatsUseCase @Inject constructor() {
         return flowOf(
             Result.success(
                 List(10) {
-                    ChatData(
+                    Chat(
                         id = it.toString(),
                         title = "Chat $it",
                         lastMessage = "Last message $it",

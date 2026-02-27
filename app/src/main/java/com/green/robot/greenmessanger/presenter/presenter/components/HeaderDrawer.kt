@@ -5,7 +5,10 @@ import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,16 +22,16 @@ import com.green.robot.greenmessanger.presenter.presenter.theme.GreenMessangerTh
 
 @Composable
 fun HeaderDrawer(
-    user: User,
+    user: User?,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
-            .padding(16.dp),
+            .padding(top = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SubcomposeAsyncImage(
-            model = user.image,
+            model = user?.image,
             contentDescription = null,
             loading = {
                 Box(modifier = Modifier.background(MaterialTheme.colorScheme.onSurface))
@@ -37,17 +40,23 @@ fun HeaderDrawer(
                 EmptyProfile()
             },
             modifier = Modifier
+                .size(52.dp)
         )
 
         Text(
-            text = user.name,
+            text = user?.name ?: "Гость",
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onPrimaryContainer
         )
         Text(
-            text = user.email,
+            text = user?.email.orEmpty(),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onPrimaryContainer
+        )
+        HorizontalDivider(
+            modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+            thickness = 1.dp,
+            color = MaterialTheme.colorScheme.onPrimary
         )
     }
 }

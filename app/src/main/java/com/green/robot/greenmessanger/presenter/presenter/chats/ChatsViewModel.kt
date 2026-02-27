@@ -2,7 +2,6 @@ package com.green.robot.greenmessanger.presenter.presenter.chats
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.green.robot.greenmessanger.presenter.domain.entity.chats.SkeletonData
 import com.green.robot.greenmessanger.presenter.domain.usecase.GetChatsUseCase
 import com.green.robot.greenmessanger.presenter.domain.usecase.GetUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,61 +23,18 @@ class ChatsViewModel @Inject constructor(
     init {
         loadData()
     }
-    /*  suspend fun loadingUser() {
-
-          try {
-              _userUiState.value = userUiState.value.copy(
-                  showLoading = userUiState.value.user != null,
-                  showSkeleton = userUiState.value.user == null,
-              )
-
-              val user = getUserUseCase()
-              when {
-                  user.isSuccess -> {
-                      val user = user.getOrNull()
-                      _userUiState.value = userUiState.value.copy(
-                          showLoading = false,
-                          showSkeleton = user == null,
-                          user = user
-                      )
-                  }
-
-                  user.isFailure -> {
-                      val user = user.exceptionOrNull()
-                      _userUiState.value = userUiState.value.copy(
-                          showLoading = false,
-                          showSkeleton = user == null,
-                          error = user?.message.orEmpty()
-                      )
-                  }
-              }
-
-          } catch (e: Exception) {
-              _userUiState.value = userUiState.value.copy(
-                  showLoading = false,
-                  error = e.message
-              )
-          }
-      }*/
 
     fun loadData() {
         viewModelScope.launch {
-            _uiState.value = uiState.value.copy(
-                showLoading = uiState.value.chats != null || uiState.value.user != null,
-                chats = if (uiState.value.chats != null) {
-                    uiState.value.chats
-                } else {
-                    List(10) {
-                        SkeletonData
-                    }
-                }
-            )
             try {
+                _uiState.value = uiState.value.copy(
+                    showLoading = uiState.value.chats != null || uiState.value.user != null,
+                    showSkeleton = uiState.value.chats == null || uiState.value.user == null
+                )
                 val user = getUserUseCase()
                 when {
                     user.isFailure -> {
                         _uiState.value = uiState.value.copy(
-                            showLoading = false,
                             error = user.exceptionOrNull()?.message.orEmpty()
                         )
                     }
@@ -92,6 +48,7 @@ class ChatsViewModel @Inject constructor(
                                         it.isSuccess -> {
                                             _uiState.value = uiState.value.copy(
                                                 showLoading = false,
+                                                showSkeleton = false,
                                                 chats = it.getOrNull().orEmpty()
                                             )
                                         }
