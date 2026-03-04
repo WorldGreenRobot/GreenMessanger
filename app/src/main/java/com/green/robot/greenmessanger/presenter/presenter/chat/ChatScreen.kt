@@ -21,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.viewModelScope
 import com.green.robot.greenmessanger.R
 import com.green.robot.greenmessanger.presenter.domain.entity.TextMessage
 import com.green.robot.greenmessanger.presenter.presenter.components.Screen

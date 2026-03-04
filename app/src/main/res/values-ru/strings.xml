@@ -46,6 +46,12 @@
     <string name="profile_picture_empty">Фото профиля</string>
     <string name="menu">Меню</string>
     <string name="arrow_back">Назад</string>
+    <string name="guest">Гость</string>
+    <string name="sing_up">Зарегистрироваться</string>
+    <string name="login">Авторизоваться</string>
+    <string name="registration">Регистрация</string>
+    <string name="authorization">Авторизация</string>
+    <string name="forgot_password">Забыли пароль?</string>
 
     <plurals name="count_members">
         <item quantity="one">%d участник</item>

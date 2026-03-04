@@ -6,7 +6,7 @@ import androidx.navigation3.runtime.NavKey
 import com.green.robot.greenmessanger.R
 
 val mainMenuItems = listOf(
-    DrawerItem(id = CreateGroup, text = R.string.create_group, R.drawable.ic_contacts_24dp),
+    DrawerItem(id = CreateGroup, text = R.string.create_group, R.drawable.ic_group_24dp),
     DrawerItem(id = CreateSecretChat, text = R.string.create_secret_chat, R.drawable.ic_encrypted_add_24dp),
     DrawerItem(id = Contacts, text = R.string.contacts, R.drawable.ic_contacts_24dp),
     DrawerItem(id = Calls, text = R.string.calls, R.drawable.ic_phone_enabled_24dp),

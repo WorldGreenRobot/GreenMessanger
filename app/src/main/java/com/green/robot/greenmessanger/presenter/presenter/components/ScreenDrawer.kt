@@ -55,7 +55,7 @@ fun ScreenDrawer(
         modifier = modifier,
         drawerContent = {
             ModalDrawerSheet(
-                modifier = Modifier.fillMaxSize().padding(end = 120.dp),
+                modifier = Modifier.fillMaxSize().padding(end = 100.dp),
                 windowInsets = WindowInsets(0,0,0,0),
                 drawerContainerColor = MaterialTheme.colorScheme.primary,
                 drawerContentColor = MaterialTheme.colorScheme.onSurface

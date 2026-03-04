@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "607869849676",
+    "project_id": "greenmessanger",
+    "storage_bucket": "greenmessanger.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607869849676:android:25f0adc1b5224140b9e4e9",
+        "android_client_info": {
+          "package_name": "com.green.robot.greenmessanger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDP2P8Cf8_Q81i-hIb9ORXybIYqUEkv7-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

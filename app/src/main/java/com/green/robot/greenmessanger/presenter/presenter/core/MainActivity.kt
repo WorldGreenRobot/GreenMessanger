@@ -1,19 +1,28 @@
-package com.green.robot.greenmessanger.presenter.presenter
+package com.green.robot.greenmessanger.presenter.presenter.core
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.ui.NavDisplay
-import com.green.robot.greenmessanger.presenter.domain.entity.chats.Chat
+import com.green.robot.greenmessanger.presenter.presenter.authetication.AuthenticationScreen
 import com.green.robot.greenmessanger.presenter.presenter.chat.ChatScreen
 import com.green.robot.greenmessanger.presenter.presenter.chats.ChatsScreen
+import com.green.robot.greenmessanger.presenter.presenter.navigation.Authentication
 import com.green.robot.greenmessanger.presenter.presenter.navigation.ChatNavigate
 import com.green.robot.greenmessanger.presenter.presenter.navigation.Chats
 import com.green.robot.greenmessanger.presenter.presenter.navigation.Contacts
@@ -31,19 +40,30 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+    private val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
 
+        splashScreen.setKeepOnScreenCondition {
+            !viewModel.navigationState.value.isLoadingApp
+        }
         setContent {
+
+            val stateNavigation by viewModel.navigationState.collectAsState()
+
             val navigationState = rememberNavigationState(
-                startRoute = Chats,
-                topLevelRoutes = setOf(Chats)
+                startRoute = stateNavigation.rootScreenRoute,
+                topLevelRoutes = setOf(stateNavigation.rootScreenRoute)
             )
 
             val navigator = remember { Navigator(navigationState) }
 
             val entryProvider = entryProvider {
+                entry<Authentication> { _ -> AuthenticationScreen(navigator) }
                 entry<Chats> { _ -> ChatsScreen(navigator) }
                 entry<ChatNavigate> { key -> ChatScreen(key.id, navigator) }
                 entry<CreateGroup> { _ -> ChatsScreen(navigator) }
@@ -55,25 +75,29 @@ class MainActivity : ComponentActivity() {
             }
 
             GreenMessangerTheme {
-                NavDisplay(
-                    entries = navigationState.toEntries(entryProvider),
-                    onBack = { navigator.goBack() },
-                    sceneStrategy = remember { DialogSceneStrategy() },
-                    transitionSpec = {
-                        slideInHorizontally(initialOffsetX = { it }) togetherWith
-                                slideOutHorizontally(targetOffsetX = { -it })
-                    },
-                    popTransitionSpec = {
-                        slideInHorizontally(initialOffsetX = { -it }) togetherWith
-                                slideOutHorizontally(targetOffsetX = { it })
-                    },
-                    predictivePopTransitionSpec = {
-                        slideInHorizontally(initialOffsetX = { -it }) togetherWith
-                                slideOutHorizontally(targetOffsetX = { it })
-                    },
-                )
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    NavDisplay(
+                        entries = navigationState.toEntries(entryProvider),
+                        onBack = { navigator.goBack() },
+                        sceneStrategy = remember { DialogSceneStrategy() },
+                        transitionSpec = {
+                            slideInHorizontally(initialOffsetX = { it }) togetherWith
+                                    slideOutHorizontally(targetOffsetX = { -it })
+                        },
+                        popTransitionSpec = {
+                            slideInHorizontally(initialOffsetX = { -it }) togetherWith
+                                    slideOutHorizontally(targetOffsetX = { it })
+                        },
+                        predictivePopTransitionSpec = {
+                            slideInHorizontally(initialOffsetX = { -it }) togetherWith
+                                    slideOutHorizontally(targetOffsetX = { it })
+                        }
+                    )
+                }
             }
-
         }
     }
 }

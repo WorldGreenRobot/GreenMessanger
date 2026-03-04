@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.green.robot.greenmessanger" />
+                  <option name="mobileSdkAppId" value="1:607869849676:android:25f0adc1b5224140b9e4e9" />
+                  <option name="projectId" value="greenmessanger" />
+                  <option name="projectNumber" value="607869849676" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

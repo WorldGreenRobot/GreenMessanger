@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -111,6 +112,15 @@ dependencies {
 
     // retrofit
     implementation(libs.retrofit)
+
+    // firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.common)
+    implementation(libs.firebase.analytics)
+
+    // splash
+    implementation(libs.core.splash)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
