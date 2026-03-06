@@ -52,6 +52,8 @@
     <string name="registration">Регистрация</string>
     <string name="authorization">Авторизация</string>
     <string name="forgot_password">Забыли пароль?</string>
+    <string name="email">Почта</string>
+    <string name="password">Пароль</string>
 
     <plurals name="count_members">
         <item quantity="one">%d участник</item>

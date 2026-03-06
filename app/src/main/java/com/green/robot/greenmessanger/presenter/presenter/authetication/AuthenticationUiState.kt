@@ -4,11 +4,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.res.stringResource
 import com.green.robot.greenmessanger.R
+import com.green.robot.greenmessanger.presenter.presenter.fields.ValueField
 
 data class AuthenticationUiState(
-    val email: String = "",
-    val password: String = "",
-    val state: RegistrationState = RegistrationState.AUTHORIZATION
+    val email: ValueField?,
+    val password: ValueField?,
+    val state: RegistrationState = RegistrationState.AUTHORIZATION,
+    val error: String? = null
 )
 
 enum class RegistrationState {

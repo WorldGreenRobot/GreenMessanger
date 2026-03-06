@@ -118,6 +118,7 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.common)
     implementation(libs.firebase.analytics)
+    implementation(libs.firebase.auth)
 
     // splash
     implementation(libs.core.splash)
